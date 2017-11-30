@@ -25,8 +25,10 @@ function Car(x,y) {
 	this.dir = 0;
 
 	this.speed = 0;
+	this.max = 8
 	this.acc = 0.08;
 	this.dec = 0.24;
+	this.turn = 3;
 
 	this.img = carImage;
 
@@ -37,19 +39,22 @@ function Car(x,y) {
 		} else {
 			this.speed -= this.dec;
 		}
-		this.speed = constrain(this.speed, 0, 15);
+		this.speed = constrain(this.speed, 0, this.max);
 
 		if (this.speed > 0) {
 			if (keyIsDown(37)) { //left arrow
+				this.dir -= this.turn*(this.speed/this.max);
 				console.log("left");
 			}
 
 			if (keyIsDown(39)) { //right arrow
+				this.dir += this.turn*(this.speed/this.max);
 				console.log("right");
 			}
 		}
 
-		this.y -= this.speed;
+		this.y -= this.speed * cos(this.dir);
+		this.x += this.speed * sin(this.dir);
 
 		//wraparound logic
 		if (this.y < 0) {
@@ -67,6 +72,10 @@ function Car(x,y) {
 	}
 
 	this.show = function() {
-		image(this.img, this.x, this.y, this.scale*this.img.width, this.scale*this.img.height);
+		push();
+		translate(this.x, this.y);
+		rotate(this.dir);
+		image(this.img, 0, 0, this.scale*this.img.width, this.scale*this.img.height);
+		pop();
 	}
 }
