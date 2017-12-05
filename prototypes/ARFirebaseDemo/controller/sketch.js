@@ -33,7 +33,8 @@ function draw() {
 				goCommand = "forward"
 				isGoing = true;
 			} else if(touches[i].y > height/2) {
-
+				goCommand = "backward"
+				isGoing = true;
 			}
 		}
 	}
