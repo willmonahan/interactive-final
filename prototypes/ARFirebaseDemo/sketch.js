@@ -29,9 +29,9 @@ function draw() {
 	})
 
 	for (var key in allData) {
-		if (allData[key].action == "left") {
+		if (allData[key].turnAction == "left") {
 			allCars[key].turnLeft();
-		} else if (allData[key].action == "right") {
+		} else if (allData[key].turnAction == "right") {
 			allCars[key].turnRight();
 		}
 	}
