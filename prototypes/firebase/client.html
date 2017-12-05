@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
+		<script language="javascript" type="text/javascript" src="../libraries/p5.dom.min.js"></script>
+		<script>
+
+		</script>
+
+	</head>
+
+	<body>
+		<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script>
+			var data;
+			var config = {
+			  	apiKey: "AIzaSyDHfVEvWlkhWyje4kRgcxIXzaqIrRYa-SE",
+			  	authDomain: "interactive-racer.firebaseapp.com",
+			  	databaseURL: "https://interactive-racer.firebaseio.com",
+			  	projectId: "interactive-racer",
+			  	storageBucket: "interactive-racer.appspot.com",
+			  	messagingSenderId: "333469377578"
+			};
+			firebase.initializeApp(config);
+			var database = firebase.database();
+
+			var updates = firebase.database().ref("/");
+			updates.on("value", function(snapshot) {
+				data = snapshot.val();
+				for (var key in data) {
+					console.log(key+" - "+data[key].action);
+				}
+			})
+		</script>
+	</body>
+</html>
