@@ -57,7 +57,7 @@ function Car() {
 	this.dec = 0.003;
 	this.dir = 0;
 	this.object.rotateY(this.dir);
-	this.turn = 7;
+	this.turn = 5;
 
 	this.move = function() {
 		if (keyIsDown(38)) { //up arrow
