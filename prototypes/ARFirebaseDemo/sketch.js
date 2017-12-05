@@ -39,8 +39,9 @@ function draw() {
 			allCars[key].goForwards();
 		} else if (allData[key].goAction == "backward") {
 			allCars[key].goBackwards();
-		} else if (allCars[key].speed > 0) {
+		} else if (allCars[key].speed > allCars[key].acc/2 || allCars[key].speed < -allCars[key].acc/2) {
 			allCars[key].decelerate();
+			//console.log("beep");
 		}
 	}
 
@@ -73,19 +74,19 @@ function Car() {
 
 	this.move = function() {
 		//console.log(this.object.getX() + " - " + this.object.getZ());
-
-		this.speed = constrain(this.speed, 0, this.max);
-
 		if (this.speed > 0) {
+			this.speed = constrain(this.speed, 0, this.max);
+		} else if (this.speed < 0) {
+			this.speed = constrain(this.speed, -this.max, 0);
+		}
+
+		if (this.speed < this.acc/2 && this.speed > -this.acc/2) {
+			this.speed = 0;
+		} else {
 			this.object.rotateY(this.dir);
 		}
 
-		if (this.moving == "forwards") {
-			this.object.nudge((this.speed*sin(this.dir)),0,(this.speed*cos(this.dir)));
-
-		} else if (this.moving == "backwards"){
-			this.object.nudge(-(this.speed*sin(this.dir)),0,-(this.speed*cos(this.dir)));
-		}
+		this.object.nudge((this.speed*sin(this.dir)),0,(this.speed*cos(this.dir)));
 
 		//console.log(this.dir);
 
@@ -109,27 +110,24 @@ function Car() {
 	}
 
 	this.goBackwards = function() {
-		this.speed += this.acc;
+		this.speed -= this.acc;
 		this.moving = "backwards";
 	}
 
 	this.decelerate = function() {
-		this.speed -= this.dec;
+		//this.speed -= this.dec;
+		if (this.speed > 0) {
+			this.speed -= this.dec;
+		} else {
+			this.speed += this.dec;
+		}
 	}
 
 	this.turnLeft = function() {
-		if (this.moving == "forwards") {
-			this.dir += this.turn*(this.speed/this.max);
-		} else {
-			this.dir -= this.turn*(this.speed/this.max);
-		}
+		this.dir += this.turn*(this.speed/this.max);
 	}
 
 	this.turnRight = function() {
-		if (this.moving == "forwards") {
-			this.dir -= this.turn*(this.speed/this.max);
-		} else {
-			this.dir += this.turn*(this.speed/this.max);
-		}
+		this.dir -= this.turn*(this.speed/this.max);
 	}
 }
