@@ -32,6 +32,8 @@ function draw() {
 			if (touches[i].y < height/2) {
 				goCommand = "forward"
 				isGoing = true;
+			} else if(touches[i].y > height/2) {
+
 			}
 		}
 	}

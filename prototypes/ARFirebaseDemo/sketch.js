@@ -36,9 +36,11 @@ function draw() {
 			allCars[key].turnRight();
 		}
 		if (allData[key].goAction == "forward") {
-			allCars[key].go = true;
+			allCars[key].goForwards();
+		} else if (allData[key].goAction == "backward") {
+			allCars[key].goBackward();
 		} else {
-			allCars[key].go = false;
+			allCars[key].decelerate();
 		}
 	}
 
@@ -64,24 +66,26 @@ function Car() {
 	this.acc = 0.003;
 	this.dec = 0.003;
 	this.dir = 0;
+	this.moving = "forwards"
 	this.object.rotateY(this.dir);
 	this.turn = 5;
 	this.go = false;
 
 	this.move = function() {
 		//console.log(this.object.getX() + " - " + this.object.getZ());
-		if (this.go) { //up arrow
-			this.accelerate();
-		} else {
-			this.decelerate();
-		}
+
 		this.speed = constrain(this.speed, 0, this.max);
 
 		if (this.speed > 0) {
 			this.object.rotateY(this.dir);
 		}
 
-		this.object.nudge((this.speed*sin(this.dir)),0,(this.speed*cos(this.dir)));
+		if (this.moving = "forwards") {
+			this.object.nudge((this.speed*sin(this.dir)),0,(this.speed*cos(this.dir)));
+		} else {
+			this.object.nudge(-(this.speed*sin(this.dir)),0,-(this.speed*cos(this.dir)));
+		}
+
 		//console.log(this.dir);
 
 		if (this.object.getZ() > 2) {
@@ -98,8 +102,14 @@ function Car() {
 		}
 	}
 
-	this.accelerate = function() {
+	this.goForwards = function() {
 		this.speed += this.acc;
+		this.moving = "forwards";
+	}
+
+	this.goBackwards = function() {
+		this.speed += this.acc;
+		this.moving = "backwards";
 	}
 
 	this.decelerate = function() {
