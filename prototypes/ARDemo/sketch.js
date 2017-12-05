@@ -44,11 +44,11 @@ function Car() {
 		asset: 'car_obj',
 		mtl: 'car_mtl',
 		x: 0,
-		y: 0.5,
+		y: 0,
 		z: 0,
-		scaleX:0.003,
-		scaleY:0.003,
-		scaleZ:0.003,
+		scaleX:0.008,
+		scaleY:0.008,
+		scaleZ:0.008,
 	});
 
 	this.speed = 0;
