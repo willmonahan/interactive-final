@@ -6,13 +6,13 @@ function setup() {
 	canvas.parent("#controller");
 	noStroke();
 
-	fill(0,255,0); //turn left, green
+	fill(4*255/5); //turn left, green
 	rect(0,0,width/4,height);
-	fill(0,0,255); //turn right, blue
+	fill(3*255/5); //turn right, blue
 	rect(width/4,0,width/4,height);
-	fill(255,0,0);
+	fill(2*255/5);
 	rect(width/2,0,width/2,height/2)
-	fill(0);
+	fill(255/5);
 	rect(width/2,height/2,width/2,height/2)
 }
 

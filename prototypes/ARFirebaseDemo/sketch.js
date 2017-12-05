@@ -31,8 +31,14 @@ function draw() {
 	for (var key in allData) {
 		if (allData[key].turnAction == "left") {
 			allCars[key].turnLeft();
-		} else if (allData[key].turnAction == "right") {
+		}
+		if (allData[key].turnAction == "right") {
 			allCars[key].turnRight();
+		}
+		if (allData[key].goAction == "forward") {
+			allCars[key].go = true;
+		} else {
+			allCars[key].go = false;
 		}
 	}
 
@@ -53,17 +59,18 @@ function Car() {
 		scaleZ:0.008,
 	});
 
-	this.speed = 0.07;
+	this.speed = 0;
 	this.max = 0.07;
 	this.acc = 0.003;
 	this.dec = 0.003;
 	this.dir = 0;
 	this.object.rotateY(this.dir);
 	this.turn = 5;
+	this.go = false;
 
 	this.move = function() {
 		//console.log(this.object.getX() + " - " + this.object.getZ());
-		if (keyIsDown(38)) { //up arrow
+		if (this.go) { //up arrow
 			this.accelerate();
 		} else {
 			this.decelerate();
@@ -96,7 +103,7 @@ function Car() {
 	}
 
 	this.decelerate = function() {
-		//this.speed -= this.dec;
+		this.speed -= this.dec;
 	}
 
 	this.turnLeft = function() {
