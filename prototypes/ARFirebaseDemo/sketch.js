@@ -38,8 +38,8 @@ function draw() {
 		if (allData[key].goAction == "forward") {
 			allCars[key].goForwards();
 		} else if (allData[key].goAction == "backward") {
-			allCars[key].goBackward();
-		} else {
+			allCars[key].goBackwards();
+		} else if (allCars[key].speed > 0) {
 			allCars[key].decelerate();
 		}
 	}
@@ -80,9 +80,10 @@ function Car() {
 			this.object.rotateY(this.dir);
 		}
 
-		if (this.moving = "forwards") {
+		if (this.moving == "forwards") {
 			this.object.nudge((this.speed*sin(this.dir)),0,(this.speed*cos(this.dir)));
-		} else {
+
+		} else if (this.moving == "backwards"){
 			this.object.nudge(-(this.speed*sin(this.dir)),0,-(this.speed*cos(this.dir)));
 		}
 
@@ -117,12 +118,18 @@ function Car() {
 	}
 
 	this.turnLeft = function() {
-		console.log("Turning Left");
-		this.dir += this.turn*(this.speed/this.max);
+		if (this.moving == "forwards") {
+			this.dir += this.turn*(this.speed/this.max);
+		} else {
+			this.dir -= this.turn*(this.speed/this.max);
+		}
 	}
 
 	this.turnRight = function() {
-		console.log("Turning Right");
-		this.dir -= this.turn*(this.speed/this.max);
+		if (this.moving == "forwards") {
+			this.dir -= this.turn*(this.speed/this.max);
+		} else {
+			this.dir += this.turn*(this.speed/this.max);
+		}
 	}
 }
