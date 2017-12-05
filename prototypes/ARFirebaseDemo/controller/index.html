@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<script language="javascript" type="text/javascript" src="../../libraries/p5.js"></script>
+		<script language="javascript" type="text/javascript" src="../../libraries/p5.dom.min.js"></script>
+		<script>
+			var command = "none";
+			var canvas;
+			function setup() {
+				canvas = createCanvas(500,500);
+
+				canvas.parent("#controller");
+				noStroke();
+
+				fill(0,255,0);
+				rect(0,0,250,500);
+				fill(0,0,255);
+				rect(250,0,250,500);
+			}
+
+			function draw() {
+
+			}
+
+			function mousePressed() {
+				if (mouseX < 250) {
+					command = "left";
+				} else {
+					command = "right";
+				}
+
+				if (user_info) {
+					var userData = {
+						action: command
+					};
+
+					var update = {};
+					update[user_info.uid+"/"] = userData;
+					firebase.database().ref().update(update);
+				}
+			}
+
+			function mouseReleased() {
+				command = "none";
+
+				if (user_info) {
+					var userData = {
+						action: command
+					};
+
+					var update = {};
+					update[user_info.uid+"/"] = userData;
+					firebase.database().ref().update(update);
+				}
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<button id="signin">Sign In</button>
+
+		<button id="signout" style="display: none">Sign Out</button>
+
+		<div id="controller" style="display: none">
+			<p>Controller goes here</p>
+		</div>
+
+		<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script>
+			var user_info = false;
+		  // Initialize Firebase
+			var config = {
+			  	apiKey: "AIzaSyDHfVEvWlkhWyje4kRgcxIXzaqIrRYa-SE",
+			  	authDomain: "interactive-racer.firebaseapp.com",
+			  	databaseURL: "https://interactive-racer.firebaseio.com",
+			  	projectId: "interactive-racer",
+			  	storageBucket: "interactive-racer.appspot.com",
+			  	messagingSenderId: "333469377578"
+			};
+			firebase.initializeApp(config);
+			var database = firebase.database();
+
+			$("#signin").click(function(event) {
+				event.preventDefault();
+
+				// setup a new auth provider object
+				var provider = new firebase.auth.GoogleAuthProvider();
+				provider.setCustomParameters({
+					prompt: 'select_account'
+				});
+
+				// authenticate
+				firebase.auth().signInWithPopup(provider).then(function(result) {
+
+				}).catch(function(error) {
+				// Handle Errors here.
+				var errorCode = error.code;
+				var errorMessage = error.message;
+
+				// The email of the user's account used.
+				var email = error.email;
+
+				// The firebase.auth.AuthCredential type that was used.
+				var credential = error.credential;
+				});
+			});
+
+			$("#signout").click(function(event) {
+				event.preventDefault();
+
+				firebase.auth().signOut();
+			})
+
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					user_info = user;
+					console.log(user_info);
+
+					$("#signin").hide();
+
+					$("#controller").show();
+					$("#signout").show();
+				} else {
+					user_info = false;
+
+					$("#signin").show();
+
+					$("#controller").hide();
+					$("#signout").hide();
+				}
+			})
+		</script>
+	</body>
+</html>

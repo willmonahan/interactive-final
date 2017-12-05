@@ -4,39 +4,41 @@ var world;
 // create a variable to hold our marker
 var marker;
 
-var car;
+var allCars = {};
 
 function setup() {
-	// create our world (this also creates a p5 canvas for us)
 	world = new World('ARScene');
 	angleMode(DEGREES);
 
-	// grab a reference to the marker that we set up on the HTML side (connect to it using its 'id')
 	marker = world.getMarker('w_marker');
 
-	// create some geometry to add to our marker
-	/*var littleCube = new Box({
-		x:0,
-		y:0.25,
-		z:0,
-		red:0,
-		green:255,
-		blue:0,
-		width:0.5,
-		height:0.5,
-		depth:0.5
-	});*/
-
-	// add the cube to our marker
-	//marker.addChild(littleCube);
-
-	car = new Car();
-	marker.addChild(car.object);
+	//marker.addChild(car.object);
 }
 
 
 function draw() {
-	car.move();
+	var updates = firebase.database().ref("/");
+	updates.on("value", function(snapshot) {
+		allData = snapshot.val();
+		for (var key in allData) {
+			if (typeof allCars[key] == "undefined") {
+				allCars[key] = new Car();
+				marker.addChild(allCars[key].object);
+			}
+		}
+	})
+
+	for (var key in allData) {
+		if (allData[key].action == "left") {
+			allCars[key].turnLeft();
+		} else if (allData[key].action == "right") {
+			allCars[key].turnRight();
+		}
+	}
+
+	for (var key in allCars) {
+		allCars[key].move();
+	}
 }
 
 function Car() {
@@ -51,7 +53,7 @@ function Car() {
 		scaleZ:0.008,
 	});
 
-	this.speed = 0;
+	this.speed = 0.07;
 	this.max = 0.07;
 	this.acc = 0.003;
 	this.dec = 0.003;
@@ -60,6 +62,7 @@ function Car() {
 	this.turn = 5;
 
 	this.move = function() {
+		//console.log(this.object.getX() + " - " + this.object.getZ());
 		if (keyIsDown(38)) { //up arrow
 			this.accelerate();
 		} else {
@@ -68,20 +71,24 @@ function Car() {
 		this.speed = constrain(this.speed, 0, this.max);
 
 		if (this.speed > 0) {
-			if (keyIsDown(37)) { //left arrow
-				this.turnLeft();
-
-			}
-
-			if (keyIsDown(39)) { //right arrow
-				this.turnRight();
-
-			}
 			this.object.rotateY(this.dir);
 		}
 
 		this.object.nudge((this.speed*sin(this.dir)),0,(this.speed*cos(this.dir)));
 		//console.log(this.dir);
+
+		if (this.object.getZ() > 2) {
+			this.object.setZ(-2);
+		}
+		if (this.object.getZ() < -2) {
+			this.object.setZ(2);
+		}
+		if (this.object.getX() > 3) {
+			this.object.setX(-3);
+		}
+		if (this.object.getX() < -3) {
+			this.object.setX(3);
+		}
 	}
 
 	this.accelerate = function() {
@@ -89,14 +96,16 @@ function Car() {
 	}
 
 	this.decelerate = function() {
-		this.speed -= this.dec;
+		//this.speed -= this.dec;
 	}
 
 	this.turnLeft = function() {
+		console.log("Turning Left");
 		this.dir += this.turn*(this.speed/this.max);
 	}
 
 	this.turnRight = function() {
+		console.log("Turning Right");
 		this.dir -= this.turn*(this.speed/this.max);
 	}
 }
