@@ -53,28 +53,28 @@ function Car() {
 
 	this.speed = 0;
 	this.max = 0.07;
-	this.acc = 0.005;
-	this.dec = 0.006;
+	this.acc = 0.003;
+	this.dec = 0.003;
 	this.dir = 0;
 	this.object.rotateY(this.dir);
-	this.turn = 8;
+	this.turn = 7;
 
 	this.move = function() {
 		if (keyIsDown(38)) { //up arrow
-			this.speed += this.acc;
+			this.accelerate();
 		} else {
-			this.speed -= this.dec;
+			this.decelerate();
 		}
 		this.speed = constrain(this.speed, 0, this.max);
 
 		if (this.speed > 0) {
 			if (keyIsDown(37)) { //left arrow
-				this.dir += this.turn*(this.speed/this.max);
+				this.turnLeft();
 
 			}
 
 			if (keyIsDown(39)) { //right arrow
-				this.dir -= this.turn*(this.speed/this.max);
+				this.turnRight();
 
 			}
 			this.object.rotateY(this.dir);
@@ -82,5 +82,21 @@ function Car() {
 
 		this.object.nudge((this.speed*sin(this.dir)),0,(this.speed*cos(this.dir)));
 		//console.log(this.dir);
+	}
+
+	this.accelerate = function() {
+		this.speed += this.acc;
+	}
+
+	this.decelerate = function() {
+		this.speed -= this.dec;
+	}
+
+	this.turnLeft = function() {
+		this.dir += this.turn*(this.speed/this.max);
+	}
+
+	this.turnRight = function() {
+		this.dir -= this.turn*(this.speed/this.max);
 	}
 }
