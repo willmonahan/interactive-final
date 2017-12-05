@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<!-- A-Frame VR Library -->
+		<script src="../libraries/aframe.min.js"></script>
+
+		<!-- ARToolKit for A-Frame VR Library -->
+		<script src='../libraries/aframe-ar.js'></script>
+
+		<!-- P5 libraries -->
+		<script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
+		<script language="javascript" type="text/javascript" src="../libraries/p5.dom.min.js"></script>
+
+		<!-- Craig's AFrameP5 AR library -->
+		<script language="javascript" type="text/javascript" src="../libraries/aframep5_ar.js"></script>
+
+		<!-- P5 Sketch -->
+		<script language="javascript" type="text/javascript" src="sketch.js"></script>
+
+		<!-- Custom Styles -->
+		<style type="text/css">
+			body {
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<!-- Define A-Frame VR Scene and set it up so that it will be manipulated through AR.js -->
+		<a-scene id="ARScene" embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono;'>
+
+			<!-- set up graphics we want to use as assets, same as in A-Frame VR-->
+			<a-assets>
+				<a-asset id="car_obj" src="assets/Convertible_1380.obj"></a-asset>
+				<a-asset id="car_mtl" src="assets/Convertible_1380.mtl"></a-asset>
+			</a-assets>
+
+			<!-- set up all of the AR markers we will be working with along with links to their 'pattern' files -->
+			<!-- note that we aren't putting any geometry inside of marker here - we will do that in the p5 sketch -->
+			<a-marker id="w_marker" preset="custom" url="markers/w_marker.pat"></a-marker>
+
+			<a-entity camera></a-entity>
+		</a-scene>
+
+
+
+	</body>
+</html>
