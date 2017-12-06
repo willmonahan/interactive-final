@@ -29,7 +29,7 @@ function draw() {
 	})
 
 	for (var key in allCars) {
-		console.log(allData[key].goAction);
+		//console.log(allData[key].goAction);
 		if (allData[key].turnAction == "left") {
 			allCars[key].turnLeft();
 		}
