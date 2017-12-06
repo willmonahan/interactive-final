@@ -27,6 +27,14 @@
 				margin: 0px;
 				overflow: hidden;
 			}
+
+			* {
+			     user-select: none;
+			    -khtml-user-select: none;
+			    -o-user-select: none;
+			    -moz-user-select: -moz-none;
+			    -webkit-user-select: none;
+			}
 		</style>
 
 	</head>
@@ -65,7 +73,7 @@
 			firebase.initializeApp(config);
 			var database = firebase.database();
 
-			
+
 		</script>
 
 	</body>

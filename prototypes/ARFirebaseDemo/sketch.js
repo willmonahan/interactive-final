@@ -21,14 +21,15 @@ function draw() {
 	updates.on("value", function(snapshot) {
 		allData = snapshot.val();
 		for (var key in allData) {
-			if (typeof allCars[key] == "undefined") {
+			if (typeof allCars[key] == "undefined" && key != "undefined") {
 				allCars[key] = new Car();
 				marker.addChild(allCars[key].object);
 			}
 		}
 	})
 
-	for (var key in allData) {
+	for (var key in allCars) {
+		console.log(allData[key].goAction);
 		if (allData[key].turnAction == "left") {
 			allCars[key].turnLeft();
 		}
