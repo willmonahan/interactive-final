@@ -17,9 +17,9 @@ function setup() {
 }
 
 function draw() {
-	var turnCommand;
+	var turnCommand = "none";
 	var isTurning = false;
-	var goCommand;
+	var goCommand = "none";
 	var isGoing = false;
 	for (var i = 0; i < touches.length; i++) {
 		if (touches[i].x < width/4) {
