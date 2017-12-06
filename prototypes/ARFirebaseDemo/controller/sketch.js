@@ -39,14 +39,7 @@ function draw() {
 		}
 	}
 
-	if (touches.length == 0) {
-		isTurning = true;
-		isGoing = true;
-		turnCommand = "none";
-		goCommand = "none";
-	}
-
-	if (isTurning || isGoing) {
+	if (isTurning || isGoing || touches.length == 0) {
 		if (!isTurning) {
 			turnCommand = "none";
 		}

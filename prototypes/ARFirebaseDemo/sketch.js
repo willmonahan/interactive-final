@@ -90,17 +90,17 @@ function Car() {
 
 		//console.log(this.dir);
 
-		if (this.object.getZ() > 2) {
-			this.object.setZ(-2);
+		if (this.object.getZ() > 8) {
+			this.object.setZ(-8);
 		}
-		if (this.object.getZ() < -2) {
-			this.object.setZ(2);
+		if (this.object.getZ() < -8) {
+			this.object.setZ(8);
 		}
-		if (this.object.getX() > 3) {
-			this.object.setX(-3);
+		if (this.object.getX() > 8) {
+			this.object.setX(-8);
 		}
-		if (this.object.getX() < -3) {
-			this.object.setX(3);
+		if (this.object.getX() < -8) {
+			this.object.setX(8);
 		}
 	}
 
