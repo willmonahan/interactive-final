@@ -1,5 +1,7 @@
 var command = "none";
 var canvas;
+var newCommands = "";
+var prevCommands = "";
 function setup() {
 	canvas = createCanvas(windowWidth,windowHeight);
 
@@ -50,14 +52,9 @@ function draw() {
 			}
 		}
 	}
+	newCommands = turnCommand + goCommand;
 
-	if (isTurning || isGoing || touches.length == 0) {
-		if (!isTurning) {
-			turnCommand = "none";
-		}
-		if (!isGoing) {
-			goCommand = "none";
-		}
+	if (newCommands != prevCommands) {
 		var userData = {
  			goAction: goCommand,
 			turnAction: turnCommand
@@ -66,6 +63,7 @@ function draw() {
  		var update = {};
  		update[user_info.uid+"/"] = userData;
  		firebase.database().ref().update(update);
+		prevCommands = newCommands;
 	}
 }
 
