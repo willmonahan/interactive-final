@@ -75,6 +75,10 @@
 			$("#signout").click(function(event) {
 				event.preventDefault();
 
+				var update = {};
+		 		update[user_info.uid+"/"] = {};
+				firebase.database().ref().remove(update)
+
 				firebase.auth().signOut();
 			})
 

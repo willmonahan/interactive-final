@@ -22,7 +22,7 @@ function draw() {
 	var updates = firebase.database().ref("/");
 	updates.on("value", function(snapshot) {
 		allData = snapshot.val();
-		console.log("Database Updated");
+		//console.log("Database Updated");
 		for (var key in allData) {
 			if (typeof allCars[key] == "undefined" && key != "undefined") {
 				allCars[key] = new Car();
