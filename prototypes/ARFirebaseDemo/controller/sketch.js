@@ -18,7 +18,7 @@ function setup() {
 	rect(width/2,height/2,width/2,height/2);
 }
 
-function windowResized1() {
+function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
 	fill(4*255/5); //turn left, green
 	rect(0,0,width/4,height);
