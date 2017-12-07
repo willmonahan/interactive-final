@@ -13,6 +13,8 @@ function setup() {
 	marker = world.getMarker('w_marker');
 
 	//marker.addChild(car.object);
+
+
 }
 
 
@@ -20,6 +22,7 @@ function draw() {
 	var updates = firebase.database().ref("/");
 	updates.on("value", function(snapshot) {
 		allData = snapshot.val();
+		console.log("Database Updated");
 		for (var key in allData) {
 			if (typeof allCars[key] == "undefined" && key != "undefined") {
 				allCars[key] = new Car();
