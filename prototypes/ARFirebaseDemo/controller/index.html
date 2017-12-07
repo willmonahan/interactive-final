@@ -76,8 +76,8 @@
 				event.preventDefault();
 
 				var update = {};
-		 		update[user_info.uid+"/"] = {};
-				firebase.database().ref().remove(update)
+		 		update[user_info.uid+"/"] = null;
+				firebase.database().ref().update(update)
 
 				firebase.auth().signOut();
 			})
