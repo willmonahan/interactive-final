@@ -5,6 +5,7 @@ var world;
 var marker;
 
 var allCars = {};
+var allData;
 
 function setup() {
 	world = new World('ARScene');
@@ -14,43 +15,72 @@ function setup() {
 
 	//marker.addChild(car.object);
 
+	var updates = firebase.database().ref("/");
+	updates.on("value", function(snapshot) {
+		allData = snapshot.val();
+
+		if (allData != null) {
+			//console.log("Database Updated");
+			for (var key in allData) {
+				if (typeof allCars[key] == "undefined" && key != "undefined") {
+					allCars[key] = new Car();
+					marker.addChild(allCars[key].object);
+				}
+			}
+
+			// remove any old unused cars
+			for (var key in allCars) {
+				if (typeof allData[key] == "undefined") {
+					console.log(allCars);
+					marker.removeChild(allCars[key].object);
+					delete allCars[key];
+					console.log(allCars);
+				}
+			}
+		}
+		else {
+			for (var key in allCars) {
+				//console.log(allCars);
+				marker.removeChild(allCars[key].object);
+				delete allCars[key];
+				//console.log(allCars);
+			}
+		}
+
+	})
 
 }
 
 
 function draw() {
-	var updates = firebase.database().ref("/");
-	updates.on("value", function(snapshot) {
-		allData = snapshot.val();
-		//console.log("Database Updated");
-		for (var key in allData) {
-			if (typeof allCars[key] == "undefined" && key != "undefined") {
-				allCars[key] = new Car();
-				marker.addChild(allCars[key].object);
+
+	//console.log(allCars);
+
+	//console.log(allData);
+	if (allData != null) {
+		for (var key in allCars) {
+			if (typeof allData[key] != "undefined") {
+				if (allData[key].turnAction == "left") {
+					allCars[key].turnLeft();
+				}
+				if (allData[key].turnAction == "right") {
+					allCars[key].turnRight();
+				}
+				if (allData[key].goAction == "forward") {
+					allCars[key].goForwards();
+				} else if (allData[key].goAction == "backward") {
+					allCars[key].goBackwards();
+				} else if (allCars[key].speed > allCars[key].acc/2 || allCars[key].speed < -allCars[key].acc/2) {
+					allCars[key].decelerate();
+					//console.log("beep");
+				}
 			}
 		}
-	})
 
-	for (var key in allCars) {
-		//console.log(allData[key].goAction);
-		if (allData[key].turnAction == "left") {
-			allCars[key].turnLeft();
-		}
-		if (allData[key].turnAction == "right") {
-			allCars[key].turnRight();
-		}
-		if (allData[key].goAction == "forward") {
-			allCars[key].goForwards();
-		} else if (allData[key].goAction == "backward") {
-			allCars[key].goBackwards();
-		} else if (allCars[key].speed > allCars[key].acc/2 || allCars[key].speed < -allCars[key].acc/2) {
-			allCars[key].decelerate();
-			//console.log("beep");
-		}
-	}
 
-	for (var key in allCars) {
-		allCars[key].move();
+		for (var key in allCars) {
+			allCars[key].move();
+		}
 	}
 }
 
