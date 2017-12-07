@@ -31,39 +31,41 @@ function windowResized() {
 }
 
 function draw() {
-	var turnCommand = "none";
-	var isTurning = false;
-	var goCommand = "none";
-	var isGoing = false;
-	for (var i = 0; i < touches.length; i++) {
-		if (touches[i].x < width/4) {
-			turnCommand = "left";
-			isTurning = true;
-		} else if (touches[i].x > width/4 && touches[i].x < width/2) {
-			turnCommand = "right";
-			isTurning = true;
-		} else {
-			if (touches[i].y < height/2) {
-				goCommand = "forward"
-				isGoing = true;
-			} else if(touches[i].y > height/2) {
-				goCommand = "backward"
-				isGoing = true;
+	if (user_info) {
+		var turnCommand = "none";
+		var isTurning = false;
+		var goCommand = "none";
+		var isGoing = false;
+		for (var i = 0; i < touches.length; i++) {
+			if (touches[i].x < width/4) {
+				turnCommand = "left";
+				isTurning = true;
+			} else if (touches[i].x > width/4 && touches[i].x < width/2) {
+				turnCommand = "right";
+				isTurning = true;
+			} else {
+				if (touches[i].y < height/2) {
+					goCommand = "forward"
+					isGoing = true;
+				} else if(touches[i].y > height/2) {
+					goCommand = "backward"
+					isGoing = true;
+				}
 			}
 		}
-	}
-	newCommands = turnCommand + goCommand;
+		newCommands = turnCommand + goCommand;
 
-	if (newCommands != prevCommands) {
-		var userData = {
- 			goAction: goCommand,
-			turnAction: turnCommand
- 		};
+		if (newCommands != prevCommands) {
+			var userData = {
+	 			goAction: goCommand,
+				turnAction: turnCommand
+	 		};
 
- 		var update = {};
- 		update[user_info.uid+"/"] = userData;
- 		firebase.database().ref().update(update);
-		prevCommands = newCommands;
+	 		var update = {};
+	 		update[user_info.uid+"/"] = userData;
+	 		firebase.database().ref().update(update);
+			prevCommands = newCommands;
+		}
 	}
 }
 
