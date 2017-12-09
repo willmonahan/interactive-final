@@ -43,7 +43,7 @@ function drawColors(colors) {
 	}
 }
 
-function mousePressed() {
+function touchStarted() {
 	switch (state) {
 		case 0:
 			if (windowHeight > windowWidth) {
