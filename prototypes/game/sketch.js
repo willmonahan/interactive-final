@@ -23,7 +23,7 @@ function setup() {
 			//console.log("Database Updated");
 			for (var key in allData) {
 				if (typeof allCars[key] == "undefined" && key != "undefined") {
-					allCars[key] = new Car();
+					allCars[key] = new Car(allData[key].colors);
 					marker.addChild(allCars[key].object);
 				}
 			}
@@ -84,7 +84,7 @@ function draw() {
 	}
 }
 
-function Car() {
+function Car(colors) {
 	/*this.object = new OBJ({
 		asset: 'car_obj',
 		mtl: 'car_mtl',
@@ -168,8 +168,9 @@ function Car() {
 	}
 
 	var cab = new Box({
-		green:0,
-		blue:0,
+		red:colors[1][0],
+		green:colors[1][1],
+		blue:colors[1][2],
 		width:1,
 		depth:1,
 		height:.9,
@@ -189,8 +190,9 @@ function Car() {
 	//this.object.addChild(windshields);
 
 	var trunk = new Box({
-		green:0,
-		blue:0,
+		red:colors[0][0],
+		green:colors[0][1],
+		blue:colors[0][2],
 		width:1.75,
 		depth:.999,
 		height:.4,
@@ -203,9 +205,9 @@ function Car() {
 		y:.2,
 		z:.52,
 		radius:0.2,
-		red:0,
-		green:255,
-		blue:0,
+		red:colors[2][0],
+		green:colors[2][1],
+		blue:colors[2][2],
 		side:'double'
 	});
 	this.object.addChild(wheel1);
@@ -215,9 +217,9 @@ function Car() {
 		y:.2,
 		z:.52,
 		radius:0.2,
-		red:0,
-		green:255,
-		blue:0,
+		red:colors[2][0],
+		green:colors[2][1],
+		blue:colors[2][2],
 		side:'double'
 	});
 	this.object.addChild(wheel2);
@@ -227,9 +229,9 @@ function Car() {
 		y:.2,
 		z:-.52,
 		radius:0.2,
-		red:0,
-		green:255,
-		blue:0,
+		red:colors[2][0],
+		green:colors[2][1],
+		blue:colors[2][2],
 		side:'double'
 	});
 	this.object.addChild(wheel3);
@@ -239,9 +241,9 @@ function Car() {
 		y:.2,
 		z:-.52,
 		radius:0.2,
-		red:0,
-		green:255,
-		blue:0,
+		red:colors[2][0],
+		green:colors[2][1],
+		blue:colors[2][2],
 		side:'double'
 	});
 	this.object.addChild(wheel4);
