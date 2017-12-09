@@ -52,7 +52,7 @@ function setup() {
 	var wheel1 = new Circle({
 		x:-.5,
 		y:.2,
-		z:.501,
+		z:.52,
 		radius:0.2,
 		red:0,
 		green:255,
@@ -64,7 +64,7 @@ function setup() {
 	var wheel2 = new Circle({
 		x:.5,
 		y:.2,
-		z:.501,
+		z:.52,
 		radius:0.2,
 		red:0,
 		green:255,
@@ -76,7 +76,7 @@ function setup() {
 	var wheel3 = new Circle({
 		x:-.5,
 		y:.2,
-		z:-.501,
+		z:-.52,
 		radius:0.2,
 		red:0,
 		green:255,
@@ -88,7 +88,7 @@ function setup() {
 	var wheel4 = new Circle({
 		x:.5,
 		y:.2,
-		z:-.501,
+		z:-.52,
 		radius:0.2,
 		red:0,
 		green:255,

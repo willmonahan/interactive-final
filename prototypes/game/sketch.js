@@ -85,7 +85,7 @@ function draw() {
 }
 
 function Car() {
-	this.object = new OBJ({
+	/*this.object = new OBJ({
 		asset: 'car_obj',
 		mtl: 'car_mtl',
 		x: 0,
@@ -94,7 +94,8 @@ function Car() {
 		scaleX:0.008,
 		scaleY:0.008,
 		scaleZ:0.008,
-	});
+	});*/
+	this.object = new Container3D();
 
 	this.speed = 0;
 	this.max = 0.07;
@@ -105,6 +106,7 @@ function Car() {
 	this.object.rotateY(this.dir);
 	this.turn = 5;
 	this.go = false;
+	this.scale = 0.25;
 
 	this.move = function() {
 		//console.log(this.object.getX() + " - " + this.object.getZ());
@@ -120,7 +122,7 @@ function Car() {
 			this.object.rotateY(this.dir);
 		}
 
-		this.object.nudge((this.speed*sin(this.dir)),0,(this.speed*cos(this.dir)));
+		this.object.nudge((this.speed*cos(this.dir)),0,(this.speed*sin(-this.dir)));
 
 		//console.log(this.dir);
 
@@ -164,4 +166,131 @@ function Car() {
 	this.turnRight = function() {
 		this.dir -= this.turn*(this.speed/this.max);
 	}
+
+	var cab = new Box({
+		green:0,
+		blue:0,
+		width:1,
+		depth:1,
+		height:.9,
+		y:.65
+	});
+	this.object.addChild(cab);
+
+	var windshields = new Box({
+		red:0,
+		green:0,
+		blue:0,
+		y:0.65,
+		width:1.1,
+		depth:.8,
+		height:.7
+	});
+	//this.object.addChild(windshields);
+
+	var trunk = new Box({
+		green:0,
+		blue:0,
+		width:1.75,
+		depth:.999,
+		height:.4,
+		y:.4
+	});
+	this.object.addChild(trunk);
+
+	var wheel1 = new Circle({
+		x:-.5,
+		y:.2,
+		z:.52,
+		radius:0.2,
+		red:0,
+		green:255,
+		blue:0,
+		side:'double'
+	});
+	this.object.addChild(wheel1);
+
+	var wheel2 = new Circle({
+		x:.5,
+		y:.2,
+		z:.52,
+		radius:0.2,
+		red:0,
+		green:255,
+		blue:0,
+		side:'double'
+	});
+	this.object.addChild(wheel2);
+
+	var wheel3 = new Circle({
+		x:-.5,
+		y:.2,
+		z:-.52,
+		radius:0.2,
+		red:0,
+		green:255,
+		blue:0,
+		side:'double'
+	});
+	this.object.addChild(wheel3);
+
+	var wheel4 = new Circle({
+		x:.5,
+		y:.2,
+		z:-.52,
+		radius:0.2,
+		red:0,
+		green:255,
+		blue:0,
+		side:'double'
+	});
+	this.object.addChild(wheel4);
+
+	var frontLight1 = new Box({
+		width:.1,
+		depth:.1,
+		height:.1,
+		x:.865,
+		y:.45,
+		z:.35
+	});
+	this.object.addChild(frontLight1);
+
+	var frontLight2 = new Box({
+		width:.1,
+		depth:.1,
+		height:.1,
+		x:.865,
+		y:.45,
+		z:-.35
+	});
+	this.object.addChild(frontLight2);
+
+	var backLight1 = new Box({
+		width:.1,
+		depth:.1,
+		height:.1,
+		x:-.865,
+		y:.45,
+		z:.35,
+		green:0,
+		blue:0
+	});
+	this.object.addChild(backLight1);
+
+	var backLight2 = new Box({
+		width:.1,
+		depth:.1,
+		height:.1,
+		x:-.865,
+		y:.45,
+		z:-.35,
+		green:0,
+		blue:0
+	});
+	this.object.addChild(backLight2);
+
+	this.object.setScaleX(this.scale);
+	this.object.setScaleY(this.scale);
+	this.object.setScaleZ(this.scale);
 }
