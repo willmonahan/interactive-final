@@ -11,9 +11,9 @@ var differentColors = [];
 for (var i = 0; i < materialColors.length; i++) {
 	differentColors[i] = materialColors[i][4];
 }
-
-var state = 0;
 var toShow = differentColors;
+
+var colorState = 0;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -44,7 +44,7 @@ function drawColors(colors) {
 }
 
 function touchStarted() {
-	switch (state) {
+	switch (colorState) {
 		case 0:
 			if (windowHeight > windowWidth) {
 				var newArrayNum = floor(mouseY/(height/toShow.length));
@@ -53,7 +53,7 @@ function touchStarted() {
 				var newArrayNum = floor(mouseX/(width/toShow.length));
 				toShow = materialColors[newArrayNum];
 			}
-			state = 1;
+			colorState = 1;
 			break;
 		case 1:
 			if (windowHeight > windowWidth) {
@@ -63,11 +63,11 @@ function touchStarted() {
 				var newArrayNum = floor(mouseX/(width/toShow.length));
 				toShow = [toShow[newArrayNum]];
 			}
-			state = 2;
+			colorState = 2;
 			break;
 		case 2:
 			toShow = differentColors;
-			state = 0;
+			colorState = 0;
 			break;
 	}
 	return false;
