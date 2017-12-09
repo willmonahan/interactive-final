@@ -70,4 +70,5 @@ function touchStarted() {
 			state = 0;
 			break;
 	}
+	return false;
 }
