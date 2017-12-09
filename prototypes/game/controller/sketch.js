@@ -8,29 +8,20 @@ function setup() {
 	canvas.parent("#controller");
 	noStroke();
 
-	fill(4*255/5); //turn left, green
-	rect(0,0,width/4,height);
-	fill(3*255/5); //turn right, blue
-	rect(width/4,0,width/4,height);
-	fill(2*255/5);
-	rect(width/2,0,width/2,height/2)
-	fill(255/5);
-	rect(width/2,height/2,width/2,height/2);
+	drawController();
 }
 
 function windowResized1() {
 	resizeCanvas(windowWidth, windowHeight);
-	fill(4*255/5); //turn left, green
-	rect(0,0,width/4,height);
-	fill(3*255/5); //turn right, blue
-	rect(width/4,0,width/4,height);
-	fill(2*255/5);
-	rect(width/2,0,width/2,height/2)
-	fill(255/5);
-	rect(width/2,height/2,width/2,height/2);
+
+	drawController();
 }
 
 function draw() {
+	controller();
+}
+
+function controller() {
 	if (user_info) {
 		var turnCommand = "none";
 		var isTurning = false;
@@ -67,6 +58,17 @@ function draw() {
 			prevCommands = newCommands;
 		}
 	}
+}
+
+function drawController() {
+	fill(4*255/5); //turn left, green
+	rect(0,0,width/4,height);
+	fill(3*255/5); //turn right, blue
+	rect(width/4,0,width/4,height);
+	fill(2*255/5);
+	rect(width/2,0,width/2,height/2)
+	fill(255/5);
+	rect(width/2,height/2,width/2,height/2);
 }
 
 // function mousePressed() {
