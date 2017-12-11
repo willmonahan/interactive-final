@@ -112,6 +112,27 @@ function drawColors(colors) {
 			rect(windowWidth*i/colors.length, 0, windowWidth/colors.length, windowHeight);
 		}
 	}
+
+	switch (colorState) {
+		case 0:
+		case 1:
+			fill(255);
+			textSize(16);
+			text("Body", 20, height-10);
+			break;
+		case 2:
+		case 3:
+			fill(255);
+			textSize(16);
+			text("Cab", 20, height-10);
+			break;
+		case 4:
+		case 5:
+			fill(255);
+			textSize(16);
+			text("Wheels", 20, height-10);
+			break;
+	}
 }
 
 function touchStarted() {
