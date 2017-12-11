@@ -54,6 +54,9 @@ function controller() {
 		var goCommand = "none";
 		var isGoing = false;
 		for (var i = 0; i < touches.length; i++) {
+			if (dist(touches[i].x,touches[i].y,width/2,0) <= width/8) {
+				signUserOut();
+			}
 			if (touches[i].x < width/4) {
 				turnCommand = "left";
 				isTurning = true;
@@ -96,6 +99,8 @@ function drawController() {
 	rect(width/2,0,width/2,height/2)
 	fill(255/5);
 	rect(width/2,height/2,width/2,height/2);
+	fill(0);
+	ellipse(width/2,0,width/8,width/8);
 }
 
 function drawColors(colors) {
@@ -147,4 +152,19 @@ function touchStarted() {
 	}
 
 	return false;
+}
+
+function signUserOut() {
+	var update = {};
+	update[user_info.uid+"/"] = null;
+	firebase.database().ref().update(update)
+
+	var colorState = 0;
+	var carColors = [];
+	var command = "none";
+	var newCommands = "";
+	var prevCommands = "";
+	var state = "none";
+
+	firebase.auth().signOut();
 }
