@@ -166,4 +166,5 @@ function signUserOut() {
 	var state = "none";
 
 	firebase.auth().signOut();
+	user_info = false;
 }
