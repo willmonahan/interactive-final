@@ -150,7 +150,6 @@ function touchStarted() {
 				break;
 		}
 	}
-
 	return false;
 }
 
