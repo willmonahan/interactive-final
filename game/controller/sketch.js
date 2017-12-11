@@ -158,12 +158,12 @@ function signUserOut() {
 	update[user_info.uid+"/"] = null;
 	firebase.database().ref().update(update)
 
-	var colorState = 0;
-	var carColors = [];
-	var command = "none";
-	var newCommands = "";
-	var prevCommands = "";
-	var state = "none";
+	colorState = 0;
+	carColors = [];
+	command = "none";
+	newCommands = "";
+	prevCommands = "";
+	state = "none";
 
 	firebase.auth().signOut();
 	user_info = false;
