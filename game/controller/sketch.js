@@ -149,8 +149,8 @@ function touchStarted() {
 				}
 				break;
 		}
+		return false;
 	}
-	return false;
 }
 
 function signUserOut() {
