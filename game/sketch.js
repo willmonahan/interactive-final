@@ -171,10 +171,10 @@ function Car(colors) {
 		red:colors[1][0],
 		green:colors[1][1],
 		blue:colors[1][2],
-		width:1,
-		depth:1,
-		height:.9,
-		y:.65
+		width:1*this.scale,
+		depth:.9*this.scale,
+		height:.5*this.scale,
+		y:.85*this.scale
 	});
 	this.object.addChild(cab);
 
@@ -182,10 +182,10 @@ function Car(colors) {
 		red:0,
 		green:0,
 		blue:0,
-		y:0.65,
-		width:1.1,
-		depth:.8,
-		height:.7
+		y:0.65*this.scale,
+		width:1.1*this.scale,
+		depth:.8*this.scale,
+		height:.7*this.scale
 	});
 	//this.object.addChild(windshields);
 
@@ -193,18 +193,18 @@ function Car(colors) {
 		red:colors[0][0],
 		green:colors[0][1],
 		blue:colors[0][2],
-		width:1.75,
-		depth:.999,
-		height:.4,
-		y:.4
+		width:1.75*this.scale,
+		depth:.999*this.scale,
+		height:.4*this.scale,
+		y:.4*this.scale
 	});
 	this.object.addChild(trunk);
 
 	var wheel1 = new Circle({
-		x:-.5,
-		y:.2,
-		z:.52,
-		radius:0.2,
+		x:-.5*this.scale,
+		y:.2*this.scale,
+		z:.52*this.scale,
+		radius:0.2*this.scale,
 		red:colors[2][0],
 		green:colors[2][1],
 		blue:colors[2][2],
@@ -213,10 +213,10 @@ function Car(colors) {
 	this.object.addChild(wheel1);
 
 	var wheel2 = new Circle({
-		x:.5,
-		y:.2,
-		z:.52,
-		radius:0.2,
+		x:.5*this.scale,
+		y:.2*this.scale,
+		z:.52*this.scale,
+		radius:0.2*this.scale,
 		red:colors[2][0],
 		green:colors[2][1],
 		blue:colors[2][2],
@@ -225,10 +225,10 @@ function Car(colors) {
 	this.object.addChild(wheel2);
 
 	var wheel3 = new Circle({
-		x:-.5,
-		y:.2,
-		z:-.52,
-		radius:0.2,
+		x:-.5*this.scale,
+		y:.2*this.scale,
+		z:-.52*this.scale,
+		radius:0.2*this.scale,
 		red:colors[2][0],
 		green:colors[2][1],
 		blue:colors[2][2],
@@ -237,10 +237,10 @@ function Car(colors) {
 	this.object.addChild(wheel3);
 
 	var wheel4 = new Circle({
-		x:.5,
-		y:.2,
-		z:-.52,
-		radius:0.2,
+		x:.5*this.scale,
+		y:.2*this.scale,
+		z:-.52*this.scale,
+		radius:0.2*this.scale,
 		red:colors[2][0],
 		green:colors[2][1],
 		blue:colors[2][2],
@@ -249,50 +249,50 @@ function Car(colors) {
 	this.object.addChild(wheel4);
 
 	var frontLight1 = new Box({
-		width:.1,
-		depth:.1,
-		height:.1,
-		x:.865,
-		y:.45,
-		z:.35
+		width:.05*this.scale,
+		depth:.1*this.scale,
+		height:.1*this.scale,
+		x:.9*this.scale,
+		y:.45*this.scale,
+		z:.35*this.scale
 	});
 	this.object.addChild(frontLight1);
 
 	var frontLight2 = new Box({
-		width:.1,
-		depth:.1,
-		height:.1,
-		x:.865,
-		y:.45,
-		z:-.35
+		width:.05*this.scale,
+		depth:.1*this.scale,
+		height:.1*this.scale,
+		x:.9*this.scale,
+		y:.45*this.scale,
+		z:-.35*this.scale
 	});
 	this.object.addChild(frontLight2);
 
 	var backLight1 = new Box({
-		width:.1,
-		depth:.1,
-		height:.1,
-		x:-.865,
-		y:.45,
-		z:.35,
+		width:.05*this.scale,
+		depth:.1*this.scale,
+		height:.1*this.scale,
+		x:-.9*this.scale,
+		y:.45*this.scale,
+		z:.35*this.scale,
 		green:0,
 		blue:0
 	});
 	this.object.addChild(backLight1);
 
 	var backLight2 = new Box({
-		width:.1,
-		depth:.1,
-		height:.1,
-		x:-.865,
-		y:.45,
-		z:-.35,
+		width:.05*this.scale,
+		depth:.1*this.scale,
+		height:.1*this.scale,
+		x:-.9*this.scale,
+		y:.45*this.scale,
+		z:-.35*this.scale,
 		green:0,
 		blue:0
 	});
 	this.object.addChild(backLight2);
 
-	this.object.setScaleX(this.scale);
-	this.object.setScaleY(this.scale);
-	this.object.setScaleZ(this.scale);
+	// this.object.setScaleX(this.scale);
+	// this.object.setScaleY(this.scale);
+	// this.object.setScaleZ(this.scale);
 }

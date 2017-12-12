@@ -23,8 +23,8 @@ function setup() {
 		blue:0,
 		width:1,
 		depth:1,
-		height:.9,
-		y:.65
+		height:.5,
+		y:.85
 	});
 	world.add(cab);
 
@@ -98,30 +98,30 @@ function setup() {
 	world.add(wheel4);
 
 	var frontLight1 = new Box({
-		width:.1,
+		width:.05,
 		depth:.1,
 		height:.1,
-		x:.865,
+		x:.9,
 		y:.45,
 		z:.35
 	});
 	world.add(frontLight1);
 
 	var frontLight2 = new Box({
-		width:.1,
+		width:.05,
 		depth:.1,
 		height:.1,
-		x:.865,
+		x:.9,
 		y:.45,
 		z:-.35
 	});
 	world.add(frontLight2);
 
 	var backLight1 = new Box({
-		width:.1,
+		width:.05,
 		depth:.1,
 		height:.1,
-		x:-.865,
+		x:-.9,
 		y:.45,
 		z:.35,
 		green:0,
@@ -130,10 +130,10 @@ function setup() {
 	world.add(backLight1);
 
 	var backLight2 = new Box({
-		width:.1,
+		width:.05,
 		depth:.1,
 		height:.1,
-		x:-.865,
+		x:-.9,
 		y:.45,
 		z:-.35,
 		green:0,
