@@ -50,35 +50,34 @@ function draw() {
 function controller() {
 	if (user_info) {
 		var turnCommand = "none";
-		var isTurning = false;
 		var goCommand = "none";
-		var isGoing = false;
+		var splatCommand = "none"
 		for (var i = 0; i < touches.length; i++) {
 			if (dist(touches[i].x,touches[i].y,width/2,0) <= width/8) {
 				signUserOut();
 			}
 			if (touches[i].x < width/4) {
 				turnCommand = "left";
-				isTurning = true;
 			} else if (touches[i].x > width/4 && touches[i].x < width/2) {
 				turnCommand = "right";
-				isTurning = true;
 			} else {
 				if (touches[i].y < height/2) {
-					goCommand = "forward"
-					isGoing = true;
+					goCommand = "forward";
 				} else if(touches[i].y > height/2) {
-					goCommand = "backward"
-					isGoing = true;
+					goCommand = "backward";
 				}
 			}
+			if (dist(width/2,height/2,touches[i].x,touches[i].y) < width/6) {
+				splatCommand = "splat";
+			}
 		}
-		newCommands = turnCommand + goCommand;
+		newCommands = turnCommand + goCommand + splatCommand;
 
 		if (newCommands != prevCommands) {
 			var userData = {
 	 			goAction: goCommand,
 				turnAction: turnCommand,
+				splatAction: splatCommand,
 				colors: carColors
 	 		};
 
@@ -101,6 +100,9 @@ function drawController() {
 	rect(width/2,height/2,width/2,height/2);
 	fill(0);
 	ellipse(width/2,0,width/8,width/8);
+	fill(carColors[3]);
+	ellipse(width/2,height/2,width/6);
+
 }
 
 function drawColors(colors) {
@@ -132,6 +134,12 @@ function drawColors(colors) {
 			textSize(16);
 			text("Wheels", 20, height-10);
 			break;
+		case 6:
+		case 7:
+		fill(255);
+		textSize(16);
+		text("Splat", 20, height-10);
+		break;
 	}
 }
 
@@ -141,6 +149,7 @@ function touchStarted() {
 			case 0:
 			case 2:
 			case 4:
+			case 6:
 				if (windowHeight > windowWidth) {
 					var newArrayNum = floor(mouseY/(height/toShow.length));
 					toShow = materialColors[materialColors.length-1-newArrayNum];
@@ -153,6 +162,7 @@ function touchStarted() {
 			case 1:
 			case 3:
 			case 5:
+			case 7:
 				var chosenColor;
 				if (windowHeight > windowWidth) {
 					var newArrayNum = floor(mouseY/(height/toShow.length));
@@ -165,7 +175,7 @@ function touchStarted() {
 				toShow = differentColors;
 				colorState ++;
 
-				if (colorState == 6) {
+				if (colorState == 8) {
 					state = "controller";
 				}
 				break;
