@@ -53,7 +53,7 @@ function controller() {
 		var goCommand = "none";
 		var splatCommand = "none";
 		for (var i = 0; i < touches.length; i++) {
-			if (dist(touches[i].x,touches[i].y,width/2,0) <= width/8) {
+			if (dist(touches[i].x,touches[i].y,width/2,0) <= width/14) {
 				signUserOut();
 			}
 			if (touches[i].x < width/4) {
@@ -67,7 +67,7 @@ function controller() {
 					goCommand = "backward";
 				}
 			}
-			if (dist(width/2,height/2,touches[i].x,touches[i].y) < width/12) {
+			if (dist(width/2,height/2,touches[i].x,touches[i].y) < width/10) {
 				splatCommand = "splat";
 			}
 		}

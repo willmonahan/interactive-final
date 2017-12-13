@@ -7,6 +7,7 @@ var marker;
 var allCars = {};
 var allData;
 var splats = [];
+var allowSplats = true;
 
 function setup() {
 	world = new World('ARScene');
@@ -32,10 +33,10 @@ function setup() {
 			// remove any old unused cars
 			for (var key in allCars) {
 				if (typeof allData[key] == "undefined") {
-					console.log(allCars);
+					//console.log(allCars);
 					marker.removeChild(allCars[key].object);
 					delete allCars[key];
-					console.log(allCars);
+					//console.log(allCars);
 				}
 			}
 		}
@@ -75,10 +76,10 @@ function draw() {
 					allCars[key].decelerate();
 					//console.log("beep");
 				}
-				if (allData[key].splatAction == "splat") {
+				if (allowSplats && allData[key].splatAction == "splat") {
 					splats.push(new Splat(allCars[key].object.getX(),allCars[key].object.getZ(),allCars[key].splat));
 					marker.addChild(splats[splats.length-1].circle);
-					console.log(splats.length);
+					//console.log(splats.length);
 				}
 			}
 		}
@@ -89,12 +90,14 @@ function draw() {
 		}
 	}
 
-	for (var i = 0; i < splats.length; i++) {
-		splats[i].count--;
-		if (splats[i].count <= 0) {
-			marker.removeChild(splats[i].circle);
-			splats.splice(i,1);
-			console.log(splats.length);
+	if (allowSplats) {
+		for (var i = 0; i < splats.length; i++) {
+			splats[i].count--;
+			if (splats[i].count <= 0) {
+				marker.removeChild(splats[i].circle);
+				splats.splice(i,1);
+				//console.log(splats.length);
+			}
 		}
 	}
 }
