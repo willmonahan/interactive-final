@@ -14,6 +14,12 @@
 			    -moz-user-select: -moz-none;
 			    -webkit-user-select: none;
 			}
+			#signin {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: scale(.5) translate(-100%, -100%);
+			}
 		</style>
 
 		<script language="javascript" type="text/javascript" src="../../libraries/p5.js"></script>
@@ -23,7 +29,7 @@
 	</head>
 
 	<body>
-		<img src="button.png" id="signin">
+		<img src="button_2x.png" id="signin">
 
 		<div id="controller" style="display: none">
 			<!--p>Controller goes here</p-->
@@ -34,6 +40,7 @@
 		<script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 		<script>
+
 			var user_info = false;
 		  // Initialize Firebase
 			var config = {
