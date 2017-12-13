@@ -67,7 +67,7 @@ function controller() {
 					goCommand = "backward";
 				}
 			}
-			if (dist(width/2,height/2,touches[i].x,touches[i].y) < width/6) {
+			if (dist(width/2,height/2,touches[i].x,touches[i].y) < width/12) {
 				splatCommand = "splat";
 			}
 		}
