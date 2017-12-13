@@ -90,15 +90,15 @@ function controller() {
 }
 
 function drawController() {
-	fill(4*255/5); //turn left, green
+	fill("#FAFAFA");
 	rect(0,0,width/4,height);
-	fill(3*255/5); //turn right, blue
+	fill("#BDBDBD");
 	rect(width/4,0,width/4,height);
-	fill(2*255/5);
+	fill("#EEEEEE");
 	rect(width/2,0,width/2,height/2)
-	fill(255/5);
+	fill("#757575");
 	rect(width/2,height/2,width/2,height/2);
-	fill(0);
+	fill("#424242");
 	ellipse(width/2,0,width/8,width/8);
 	fill(carColors[3]);
 	ellipse(width/2,height/2,width/6);
