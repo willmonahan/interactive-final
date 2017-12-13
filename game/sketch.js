@@ -6,6 +6,7 @@ var marker;
 
 var allCars = {};
 var allData;
+var splats = [];
 
 function setup() {
 	world = new World('ARScene');
@@ -74,12 +75,26 @@ function draw() {
 					allCars[key].decelerate();
 					//console.log("beep");
 				}
+				if (allData[key].splatAction == "splat") {
+					splats.push(new Splat(allCars[key].object.getX(),allCars[key].object.getZ(),allCars[key].splat));
+					marker.addChild(splats[splats.length-1].circle);
+					console.log(splats.length);
+				}
 			}
 		}
 
 
 		for (var key in allCars) {
 			allCars[key].move();
+		}
+	}
+
+	for (var i = 0; i < splats.length; i++) {
+		splats[i].count--;
+		if (splats[i].count <= 0) {
+			marker.removeChild(splats[i].circle);
+			splats.splice(i,1);
+			console.log(splats.length);
 		}
 	}
 }
@@ -107,6 +122,7 @@ function Car(colors) {
 	this.turn = 5;
 	this.go = false;
 	this.scale = 0.25;
+	this.splat = colors[3];
 
 	this.move = function() {
 		//console.log(this.object.getX() + " - " + this.object.getZ());
@@ -295,4 +311,22 @@ function Car(colors) {
 	// this.object.setScaleX(this.scale);
 	// this.object.setScaleY(this.scale);
 	// this.object.setScaleZ(this.scale);
+}
+
+function Splat(x, z, colors) {
+	this.x = x;
+	this.z = z;
+	this.radius = 0.1;
+	this.count = 50;
+
+	this.circle = new Circle({
+		x: this.x,
+		z: this.z,
+		rotationX: 90,
+		radius: this.radius,
+		side:'double',
+		red:colors[0],
+		green:colors[1],
+		blue:colors[2]
+	});
 }

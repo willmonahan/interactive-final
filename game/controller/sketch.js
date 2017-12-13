@@ -51,7 +51,7 @@ function controller() {
 	if (user_info) {
 		var turnCommand = "none";
 		var goCommand = "none";
-		var splatCommand = "none"
+		var splatCommand = "none";
 		for (var i = 0; i < touches.length; i++) {
 			if (dist(touches[i].x,touches[i].y,width/2,0) <= width/8) {
 				signUserOut();
